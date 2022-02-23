@@ -8,7 +8,7 @@ function App() {
   const handleFetch = (e) => {
     if (e.key === "Enter") {
       fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=d791dc08a1799937193437cae5da89fd`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=d791dc08a1799937193437cae5da89fd`
       )
         .then((response) => response.json())
         .then((data) => {
