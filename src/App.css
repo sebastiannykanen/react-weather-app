@@ -28,11 +28,11 @@
 }
 
 .search-bar:hover {
-  cursor: crosshair;
+  background-color: #fff;
 }
 
 .search-bar:focus {
-  outline: none !important;
+  outline: none;
   background-color: #fff;
 }
 
