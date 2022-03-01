@@ -2,35 +2,27 @@ import React, { useEffect, useState } from "react";
 import debounce from "lodash.debounce";
 import "./App.css";
 
+const handleFetch = debounce((city, setWeather) => {
+  fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=d791dc08a1799937193437cae5da89fd`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      setWeather(data);
+    });
+}, 1000);
+
 function App() {
   const [city, setCity] = useState("");
-  const [weather, setWeather] = useState({});
-
-  // const handleFetch = (e) => {
-  //   if (e.key === "Enter") {
-  //     fetch(
-  //       `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=d791dc08a1799937193437cae5da89fd`
-  //     )
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         setWeather(data);
-  //         setCity("");
-  //       });
-  //   }
-  // };
-
-  const handleFetch = () => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=d791dc08a1799937193437cae5da89fd`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setWeather(data);
-      });
-  };
+  const [weather, setWeather] = useState(undefined);
 
   useEffect(() => {
-    debounce(handleFetch, 1000)();
+    const fetchData = async () => {
+      if (city) {
+        await handleFetch(city, setWeather);
+      }
+    };
+    fetchData();
   }, [city]);
 
   return (
@@ -45,7 +37,7 @@ function App() {
           placeholder="Enter city..."
         />
       </div>
-      {typeof weather.sys != "undefined" ? (
+      {typeof weather != "undefined" ? (
         <>
           <div className="location">
             {weather.name}, {weather.sys.country}
