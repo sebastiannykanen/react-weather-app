@@ -29,6 +29,10 @@
   box-shadow: 3px 3px rgba(0, 0, 0, 0.5);
 }
 
+.fa-magnifying-glass {
+  width: 20px;
+}
+
 .search-bar:hover {
   background-color: #fff;
 }
