@@ -37,7 +37,7 @@ function App() {
           placeholder="Enter city..."
         />
       </div>
-      {typeof weather != "undefined" ? (
+      {typeof weather != "undefined" && typeof weather.sys != "undefined" ? (
         <>
           <div className="location">
             {weather.name}, {weather.sys.country}
